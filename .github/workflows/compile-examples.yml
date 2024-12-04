@@ -23,7 +23,7 @@ jobs:
         - name: Arduino_SecureElement
       # sketch paths to compile (recursive) for all boards
       UNIVERSAL_SKETCH_PATHS: |
-        - examples/boardID
+        - examples/HWUniqueId
       SKETCHES_REPORTS_PATH: sketches-reports
 
     strategy:
