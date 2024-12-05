@@ -19,22 +19,18 @@ bool UniqueHWId::begin() {
 
 bool UniqueHWId::get(uint8_t* in, uint32_t size) {
     if (_init == false || size < BOARD_PROVISIONING_ID_SIZE) {
-        Serial.println("BOARD_PROVISIONING_ID_SIZE ERROR");
         return false;
     }
     uint8_t offset = 0;
     if (!microId::get(&in[offset], size)) {
-        Serial.println("microId ERROR");
         return false;
     }
     offset += UC_UID_SIZE;
     if (!_nId.get(&in[offset], size - offset)) {
-        Serial.println("networkId ERROR");
         return false;
     }
     offset += IFACE_MAC_ADDR_LENGTH;
     if (!_sId.get(&in[offset], size - offset)) {
-        Serial.println("secureId ERROR");
         return false;
     }
     return true;
