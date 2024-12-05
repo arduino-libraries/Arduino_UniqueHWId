@@ -10,14 +10,14 @@
 
 #include <Arduino_SHA256.h>
 #include <Arduino_HEX.h>
-#include "HWUniqueId.h"
+#include "uniqueHWId.h"
 
-bool HWUniqueId::begin() {
+bool UniqueHWId::begin() {
     _init =_sId.begin() && _nId.begin();
     return _init;
 }
 
-bool HWUniqueId::get(uint8_t* in, uint32_t size) {
+bool UniqueHWId::get(uint8_t* in, uint32_t size) {
     if (_init == false || size < BOARD_PROVISIONING_ID_SIZE) {
         Serial.println("BOARD_PROVISIONING_ID_SIZE ERROR");
         return false;
@@ -40,7 +40,7 @@ bool HWUniqueId::get(uint8_t* in, uint32_t size) {
     return true;
 }
 
-String HWUniqueId::get() {
+String UniqueHWId::get() {
     uint8_t data[BOARD_PROVISIONING_ID_SIZE];
     if (!get(data, sizeof(data))) {
         return String("");

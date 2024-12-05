@@ -17,7 +17,7 @@
 /*
  * This class contains the methods to get board hardware unique id
  */
-class HWUniqueId {
+class UniqueHWId {
 
 public:
     static constexpr int BOARD_PROVISIONING_ID_SIZE  = UC_UID_SIZE +
