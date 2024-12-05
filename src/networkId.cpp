@@ -11,24 +11,23 @@
 #include "networkId.h"
 
 bool networkId::begin() {
-#if   defined(ARDUINO_SAMD_MKRWIFI1010) || \
-      defined(ARDUINO_SAMD_NANO_33_IOT)
-    WiFi.setTimeout(0);
-    return !!WiFi.begin("In33dm4c4ddr35", "In33dm4c4ddr35");
-#elif defined(ARDUINO_PORTENTA_H7_M7)   || \
-      defined(ARDUINO_NICLA_VISION)     || \
-      defined(ARDUINO_GIGA)
-    WiFi.setTimeout(0);
-    return !!WiFi.begin("In33dm4c4ddr35", "In33dm4c4ddr35", ENC_TYPE_TKIP);
-#elif defined(ARDUINO_PORTENTA_C33)     || \
+#if   defined(ARDUINO_NANO_RP2040_CONNECT) || \
+      defined(ARDUINO_SAMD_MKRWIFI1010)    || \
+      defined(ARDUINO_SAMD_NANO_33_IOT)    || \
+      defined(ARDUINO_PORTENTA_C33)        || \
       defined(ARDUINO_UNOR4_WIFI)
     WiFi.setTimeout(0);
-    return !!WiFi.begin("In33dm4c4ddr35", "In33dm4c4ddr35");
-#elif defined(ARDUINO_NANO_RP2040_CONNECT)
+    int result = WiFi.begin("In33dm4c4ddr35", "In33dm4c4ddr35");
+    return (result != WL_NO_SHIELD) ? true : false;
+#elif defined(ARDUINO_PORTENTA_H7_M7)      || \
+      defined(ARDUINO_NICLA_VISION)        || \
+      defined(ARDUINO_GIGA)
     WiFi.setTimeout(0);
-    return !!WiFi.begin("In33dm4c4ddr35", "In33dm4c4ddr35");
+    int result = WiFi.begin("In33dm4c4ddr35", "In33dm4c4ddr35", ENC_TYPE_TKIP);
+    return ( result != WL_NO_SHIELD) ? true : false;
 #elif defined(ARDUINO_OPTA)
-    return !!Ethernet.begin(NULL, 0, 0);
+    Ethernet.begin(NULL, 0, 0);
+    return true;
 #endif
 }
 
@@ -41,17 +40,14 @@ bool networkId::get(uint8_t *in, uint32_t size) {
     if (size < IFACE_MAC_ADDR_LENGTH) {
         return false;
     }
-#if   defined(ARDUINO_SAMD_MKRWIFI1010) || \
-      defined(ARDUINO_SAMD_NANO_33_IOT)
-    WiFi.macAddress(in);
-#elif defined(ARDUINO_PORTENTA_H7_M7)   || \
-      defined(ARDUINO_NICLA_VISION)     || \
+#if   defined(ARDUINO_NANO_RP2040_CONNECT) || \
+      defined(ARDUINO_SAMD_MKRWIFI1010)    || \
+      defined(ARDUINO_SAMD_NANO_33_IOT)    || \
+      defined(ARDUINO_PORTENTA_C33)        || \
+      defined(ARDUINO_UNOR4_WIFI)          || \
+      defined(ARDUINO_PORTENTA_H7_M7)      || \
+      defined(ARDUINO_NICLA_VISION)        || \
       defined(ARDUINO_GIGA)
-    WiFi.macAddress(in);
-#elif defined(ARDUINO_PORTENTA_C33)     || \
-      defined(ARDUINO_UNOR4_WIFI)
-    WiFi.macAddress(in);
-#elif defined(ARDUINO_NANO_RP2040_CONNECT)
     WiFi.macAddress(in);
 #elif defined(ARDUINO_OPTA)
     Ethernet.MACAddress(in);
