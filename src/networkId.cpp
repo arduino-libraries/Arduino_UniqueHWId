@@ -43,12 +43,12 @@ bool networkId::begin() {
 }
 
 bool networkId::get(uint8_t *in, uint32_t size) {
-#if IFACE_MAC_ADDR_LENGTH == 0
+#if NETWORK_ID_SIZE == 0
     (void)in;
     (void)size;
     return false;
 #else
-    if (size < IFACE_MAC_ADDR_LENGTH) {
+    if (size < NETWORK_ID_SIZE) {
         return false;
     }
 #if   defined(ARDUINO_NANO_RP2040_CONNECT) || \

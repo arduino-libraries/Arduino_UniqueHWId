@@ -29,7 +29,7 @@ bool UniqueHWId::get(uint8_t* in, uint32_t size) {
     if (!_nId.get(&in[offset], size - offset)) {
         return false;
     }
-    offset += IFACE_MAC_ADDR_LENGTH;
+    offset += NETWORK_ID_SIZE;
     if (!_sId.get(&in[offset], size - offset)) {
         return false;
     }

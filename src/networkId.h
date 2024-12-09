@@ -17,30 +17,30 @@
       defined(ARDUINO_NICLA_VISION)        || \
       defined(ARDUINO_GIGA)
     #include <WiFi.h>
-    #define IFACE_MAC_ADDR_LENGTH WL_MAC_ADDR_LENGTH
+    #define NETWORK_ID_SIZE WL_MAC_ADDR_LENGTH
 #elif defined(ARDUINO_SAMD_MKRNB1500)
     #include <MKRNB.h>
     /* We don't take in account Luhn check digit */
-    #define IFACE_MAC_ADDR_LENGTH 7
+    #define NETWORK_ID_SIZE 7
 #elif defined(ARDUINO_SAMD_MKRGSM1400)
     #include <MKRGSM.h>
     /* We don't take in account Luhn check digit */
-    #define IFACE_MAC_ADDR_LENGTH 7
+    #define NETWORK_ID_SIZE 7
 #elif defined(ARDUINO_SAMD_MKRWAN1300) || \
       defined(ARDUINO_SAMD_MKRWAN1310)
     #include <MKRWAN.h>
-    #define IFACE_MAC_ADDR_LENGTH 8
+    #define NETWORK_ID_SIZE 8
 #elif defined(ARDUINO_PORTENTA_C33)
     #include <WiFiC3.h>
-    #define IFACE_MAC_ADDR_LENGTH WL_MAC_ADDR_LENGTH
+    #define NETWORK_ID_SIZE WL_MAC_ADDR_LENGTH
 #elif defined(ARDUINO_UNOR4_WIFI)
     #include <WiFi.h>
-    #define IFACE_MAC_ADDR_LENGTH 6
+    #define NETWORK_ID_SIZE 6
 #elif defined(ARDUINO_OPTA)
     #include <Ethernet.h>
-    #define IFACE_MAC_ADDR_LENGTH 6
+    #define NETWORK_ID_SIZE 6
 #else
-    #define IFACE_MAC_ADDR_LENGTH 0
+    #define NETWORK_ID_SIZE 0
 #endif
 
 /*
