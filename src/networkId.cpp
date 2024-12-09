@@ -14,11 +14,12 @@ bool networkId::begin() {
 #if   defined(ARDUINO_NANO_RP2040_CONNECT) || \
       defined(ARDUINO_SAMD_MKRWIFI1010)    || \
       defined(ARDUINO_SAMD_NANO_33_IOT)    || \
-      defined(ARDUINO_PORTENTA_C33)        || \
       defined(ARDUINO_UNOR4_WIFI)
     WiFi.setTimeout(0);
     int result = WiFi.begin("In33dm4c4ddr35", "In33dm4c4ddr35");
     return (result != WL_NO_SHIELD) ? true : false;
+#elif defined(ARDUINO_PORTENTA_C33)
+    return true;
 #elif defined(ARDUINO_PORTENTA_H7_M7)      || \
       defined(ARDUINO_NICLA_VISION)        || \
       defined(ARDUINO_GIGA)
