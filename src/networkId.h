@@ -18,6 +18,18 @@
       defined(ARDUINO_GIGA)
     #include <WiFi.h>
     #define IFACE_MAC_ADDR_LENGTH WL_MAC_ADDR_LENGTH
+#elif defined(ARDUINO_SAMD_MKRNB1500)
+    #include <MKRNB.h>
+    /* We don't take in account Luhn check digit */
+    #define IFACE_MAC_ADDR_LENGTH 7
+#elif defined(ARDUINO_SAMD_MKRGSM1400)
+    #include <MKRGSM.h>
+    /* We don't take in account Luhn check digit */
+    #define IFACE_MAC_ADDR_LENGTH 7
+#elif defined(ARDUINO_SAMD_MKRWAN1300) || \
+      defined(ARDUINO_SAMD_MKRWAN1310)
+    #include <MKRWAN.h>
+    #define IFACE_MAC_ADDR_LENGTH 8
 #elif defined(ARDUINO_PORTENTA_C33)
     #include <WiFiC3.h>
     #define IFACE_MAC_ADDR_LENGTH WL_MAC_ADDR_LENGTH
@@ -48,4 +60,14 @@ class networkId {
 public:
     bool begin();
     bool get(uint8_t *in, uint32_t size);
+
+private:
+#if   defined(ARDUINO_SAMD_MKRNB1500)
+    NBModem _modem;
+#elif defined(ARDUINO_SAMD_MKRGSM1400)
+    GSMModem _modem;
+#elif defined(ARDUINO_SAMD_MKRWAN1300) || \
+      defined(ARDUINO_SAMD_MKRWAN1310)
+    LoRaModem _modem;
+#endif
 };
