@@ -18,6 +18,7 @@ bool networkId::begin() {
       defined(ARDUINO_UNOR4_WIFI)
     WiFi.setTimeout(0);
     int result = WiFi.begin("In33dm4c4ddr35", "In33dm4c4ddr35");
+    WiFi.setTimeout(10000);
     return (result != WL_NO_SHIELD) ? true : false;
 #elif defined(ARDUINO_PORTENTA_C33)
     return true;
@@ -33,6 +34,7 @@ bool networkId::begin() {
       defined(ARDUINO_GIGA)
     WiFi.setTimeout(0);
     int result = WiFi.begin("In33dm4c4ddr35", "In33dm4c4ddr35", ENC_TYPE_TKIP);
+    WiFi.setTimeout(10000);
     return ( result != WL_NO_SHIELD) ? true : false;
 #elif defined(ARDUINO_OPTA)
     Ethernet.begin(NULL, 0, 0);
