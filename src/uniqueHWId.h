@@ -21,7 +21,7 @@ class UniqueHWId {
 
 public:
     static constexpr int BOARD_PROVISIONING_ID_SIZE  = UC_UID_SIZE +
-                                                       IFACE_MAC_ADDR_LENGTH +
+                                                       NETWORK_ID_SIZE +
                                                        CRYPTO_SN_SIZE;
 
     bool begin();
