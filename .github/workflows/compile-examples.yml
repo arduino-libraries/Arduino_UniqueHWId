@@ -82,6 +82,33 @@ jobs:
             type: mbed_edge
             artifact-name-suffix: arduino-mbed_edge-edge_control
 
+        # make board type-specific customizations to the matrix jobs
+        include:
+          - board:
+              type: mkr1000
+            libraries: |
+              - name: WiFi101
+
+          - board:
+              type: nina
+            libraries: |
+              - name: WiFiNINA
+
+          - board:
+              type: wan
+            libraries: |
+              - name: MKRWAN
+
+          - board:
+              type: gsm
+            libraries: |
+              - name: MKRGSM
+
+          - board:
+              type: nb
+            libraries: |
+              - name: MKRNB
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
