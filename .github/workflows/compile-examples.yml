@@ -21,7 +21,7 @@ jobs:
       UNIVERSAL_LIBRARIES: |
         - source-path: ./
         - name: Arduino_SecureElement
-        - source-url: https://github.com/arduino/Arduino_CloudUtils.git
+        - source-url: https://github.com/arduino-libraries/Arduino_CloudUtils.git
           version: 0.0.1
       # sketch paths to compile (recursive) for all boards
       UNIVERSAL_SKETCH_PATHS: |
