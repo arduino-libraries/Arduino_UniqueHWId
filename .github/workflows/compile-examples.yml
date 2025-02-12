@@ -33,9 +33,6 @@ jobs:
 
       matrix:
         board:
-          - fqbn: arduino:samd:mkr1000
-            type: mkr1000
-            artifact-name-suffix: arduino-samd-mkr1000
           - fqbn: arduino:samd:mkrwifi1010
             type: nina
             artifact-name-suffix: arduino-samd-mkrwifi1010
@@ -54,9 +51,6 @@ jobs:
           - fqbn: arduino:mbed_portenta:envie_m7
             type: mbed_portenta
             artifact-name-suffix: arduino-mbed_portenta-envie_m7
-          - fqbn: esp32:esp32:esp32
-            type: esp32
-            artifact-name-suffix: esp32-esp32-esp32
           - fqbn: arduino:mbed_nano:nanorp2040connect
             type: nina
             artifact-name-suffix: arduino-mbed_nano-nanorp2040connect
@@ -75,20 +69,9 @@ jobs:
           - fqbn: arduino:renesas_uno:unor4wifi
             type: renesas_uno
             artifact-name-suffix: arduino-renesas_uno-unor4wifi
-          - fqbn: arduino:esp32:nano_nora
-            type: arduino_esp32
-            artifact-name-suffix: arduino-esp32-nano_nora
-          - fqbn: arduino:mbed_edge:edge_control
-            type: mbed_edge
-            artifact-name-suffix: arduino-mbed_edge-edge_control
 
         # make board type-specific customizations to the matrix jobs
         include:
-          - board:
-              type: mkr1000
-            libraries: |
-              - name: WiFi101
-
           - board:
               type: nina
             libraries: |
