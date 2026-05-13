@@ -42,7 +42,4 @@ class secureId {
 public:
     bool begin();
     bool get(uint8_t *in, uint32_t size);
-
-private:
-    SecureElement _se;
 };
