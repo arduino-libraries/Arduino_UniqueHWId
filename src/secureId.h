@@ -17,19 +17,15 @@
       defined(ARDUINO_SAMD_MKRWAN1300)     || \
       defined(ARDUINO_SAMD_MKRWAN1310)     || \
       defined(ARDUINO_SAMD_MKRNB1500)      || \
-      defined(ARDUINO_SAMD_MKR1000)        || \
       defined(ARDUINO_PORTENTA_H7_M7)      || \
+      defined(ARDUINO_SAMD_MKR1000)        || \
+      defined(ARDUINO_PORTENTA_C33)        || \
+      defined(ARDUINO_NICLA_VISION)        || \
+      defined(ARDUINO_UNOR4_WIFI)          || \
       defined(ARDUINO_OPTA)                || \
       defined(ARDUINO_GIGA)
     #include <Arduino_SecureElement.h>
-    #define CRYPTO_SN_SIZE 9
-#elif defined(ARDUINO_PORTENTA_C33)        || \
-      defined(ARDUINO_NICLA_VISION)
-    #include <Arduino_SecureElement.h>
-    #define CRYPTO_SN_SIZE 18
-#elif defined(ARDUINO_UNOR4_WIFI)
-    #include <Arduino_SecureElement.h>
-    #define CRYPTO_SN_SIZE 6
+    #define CRYPTO_SN_SIZE SE_SN_LENGTH
 #else
     #define CRYPTO_SN_SIZE 0
 #endif
