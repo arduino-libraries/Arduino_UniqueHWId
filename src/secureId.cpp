@@ -12,7 +12,7 @@
 #include <Arduino_HEX.h>
 
 bool secureId::begin() {
-    return !!_se.begin();
+    return !!SecureElement.begin();
 }
 
 bool secureId::get(uint8_t *in, uint32_t size) {
@@ -24,7 +24,7 @@ bool secureId::get(uint8_t *in, uint32_t size) {
     if (size < CRYPTO_SN_SIZE) {
         return false;
     }
-    if (!THEXT::decode((_se.serialNumber()).substring(0, CRYPTO_SN_SIZE*2), in, size)) {
+    if (!THEXT::decode((SecureElement.serialNumber()).substring(0, CRYPTO_SN_SIZE*2), in, size)) {
         return false;
     }
     return true;
