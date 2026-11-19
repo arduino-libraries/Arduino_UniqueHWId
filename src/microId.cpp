@@ -11,6 +11,10 @@
 #include <Arduino.h>
 #include "microId.h"
 
+#if defined(ARDUINO_ARCH_ZEPHYR)
+#include <zephyr/drivers/hwinfo.h>
+#endif
+
 bool microId::get(uint8_t *in, uint32_t size) {
 #if UC_UID_SIZE == 0
     (void)in;
@@ -20,7 +24,14 @@ bool microId::get(uint8_t *in, uint32_t size) {
     if (size < UC_UID_SIZE) {
         return false;
     }
-#if   defined(ARDUINO_SAMD_MKRWIFI1010) || \
+#if defined(ARDUINO_ARCH_ZEPHYR)
+    uint8_t dev_id[size];
+    size_t len = hwinfo_get_device_id(dev_id, size);
+
+    for(uint8_t i=0; i<len/sizeof(uint32_t); i++) {
+        (*(uint32_t*)(&in[i << 2])) = *(uint32_t*)(&dev_id[i << 2]);
+    }
+#elif defined(ARDUINO_SAMD_MKRWIFI1010) || \
       defined(ARDUINO_SAMD_NANO_33_IOT)
     (*(uint32_t*)(&in[0x0])) = __builtin_bswap32(*(volatile uint32_t*)(0x0080A00C));
     (*(uint32_t*)(&in[0x4])) = __builtin_bswap32(*(volatile uint32_t*)(0x0080A040));

@@ -12,7 +12,16 @@
 #include <Arduino_HEX.h>
 
 bool networkId::begin() {
-#if   defined(ARDUINO_NANO_RP2040_CONNECT) || \
+#if defined(ARDUINO_ARCH_ZEPHYR) && (       \
+      defined(ARDUINO_NANO_RP2040_CONNECT) || \
+      defined(ARDUINO_SAMD_MKRWIFI1010)    || \
+      defined(ARDUINO_SAMD_NANO_33_IOT)    || \
+      defined(ARDUINO_PORTENTA_H7_M7)      || \
+      defined(ARDUINO_NICLA_VISION)        || \
+      defined(ARDUINO_GIGA)                || \
+      defined(ARDUINO_PORTENTA_C33))
+    return WiFi.status() != WL_NO_SHIELD;
+#elif defined(ARDUINO_NANO_RP2040_CONNECT) || \
       defined(ARDUINO_SAMD_MKRWIFI1010)    || \
       defined(ARDUINO_SAMD_NANO_33_IOT)    || \
       defined(ARDUINO_UNOR4_WIFI)
@@ -53,7 +62,16 @@ bool networkId::get(uint8_t *in, uint32_t size) {
     if (size < NETWORK_ID_SIZE) {
         return false;
     }
-#if   defined(ARDUINO_NANO_RP2040_CONNECT) || \
+#if defined(ARDUINO_ARCH_ZEPHYR) && (       \
+      defined(ARDUINO_NANO_RP2040_CONNECT) || \
+      defined(ARDUINO_SAMD_MKRWIFI1010)    || \
+      defined(ARDUINO_SAMD_NANO_33_IOT)    || \
+      defined(ARDUINO_PORTENTA_H7_M7)      || \
+      defined(ARDUINO_NICLA_VISION)        || \
+      defined(ARDUINO_GIGA)                || \
+      defined(ARDUINO_PORTENTA_C33))
+    WiFi.MACAddress(in);
+#elif defined(ARDUINO_NANO_RP2040_CONNECT) || \
       defined(ARDUINO_SAMD_MKRWIFI1010)    || \
       defined(ARDUINO_SAMD_NANO_33_IOT)    || \
       defined(ARDUINO_PORTENTA_C33)        || \

@@ -10,7 +10,17 @@
 
 #pragma once
 
-#if   defined(ARDUINO_NANO_RP2040_CONNECT) || \
+#if   defined(ARDUINO_ARCH_ZEPHYR) && (       \
+      defined(ARDUINO_NANO_RP2040_CONNECT) || \
+      defined(ARDUINO_SAMD_MKRWIFI1010)    || \
+      defined(ARDUINO_SAMD_NANO_33_IOT)    || \
+      defined(ARDUINO_PORTENTA_H7_M7)      || \
+      defined(ARDUINO_NICLA_VISION)        || \
+      defined(ARDUINO_GIGA)                || \
+      defined(ARDUINO_PORTENTA_C33))
+    #include <WiFi.h>
+    #define NETWORK_ID_SIZE WL_MAC_ADDR_LENGTH
+#elif defined(ARDUINO_NANO_RP2040_CONNECT) || \
       defined(ARDUINO_SAMD_MKRWIFI1010)    || \
       defined(ARDUINO_SAMD_NANO_33_IOT)    || \
       defined(ARDUINO_PORTENTA_H7_M7)      || \
